@@ -1,0 +1,1 @@
+git+https://www.github.com/bsmn/ndasynapse.git@develop
