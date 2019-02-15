@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 
-synapseusername=`aws secretsmanager --region us-east-1 --output text get-secret-value --secret-id synapse-kdaily-username | cut -f 4`
-synapsepassword=`aws secretsmanager --region us-east-1 --output text get-secret-value --secret-id synapse-kdaily-password | cut -f 4`
-
-synapse login -u ${synapseusername} -p ${synapsepassword} --rememberMe
+aws ssm get-parameters --names synapseconfig-kdaily --with-decryption --region us-east-1 --output text --query "Parameters[*].{Value:Value}" > /root/.synapseConfig
+aws ssm get-parameters --names nda-config --with-decryption --region us-east-1 --output text --query "Parameters[*].{Value:Value}" > /root/ndaconfig.json
 
 for manifest_type in genomics_subject genomics_sample nichd_btb ; do
 
