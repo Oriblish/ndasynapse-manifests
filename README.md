@@ -1,3 +1,5 @@
+[![Docker Automated build](https://img.shields.io/docker/automated/bsmnetwork/ndasynapse-manifests.svg?style=flat)](https://hub.docker.com/r/bsmnetwork/ndasynapse-manifests)
+
 # NDA manifests to Synapse
 
 This is a Docker container that uses the Python package `ndasynapse` to query the NIMH Data Archive API for data submission manifests related to Brain Somatic Mosaicism Network collections.
