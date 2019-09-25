@@ -20,7 +20,8 @@ COPY requirements.txt /requirements.txt
 
 RUN pip install -r /requirements.txt
 
-COPY run.sh /run.sh
-RUN chmod +x /run.sh
+COPY run-live-manifests.sh /run-live-manifests.sh
+RUN chmod +x /run-live-manifests.sh
 
-CMD /run.sh
+COPY run-original-manifests.sh /run-original-manifests.sh
+RUN chmod +x /run-original-manifests.sh
