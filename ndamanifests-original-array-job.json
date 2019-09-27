@@ -1,0 +1,8 @@
+{
+  "jobName": "bsmn-original-manifests-array",
+  "jobQueue": "bsmn-ndasynapse-manifests",
+  "arrayProperties": {
+    "size": 3
+  },
+  "jobDefinition": "ndasynapse-manifests-original:3"
+}
