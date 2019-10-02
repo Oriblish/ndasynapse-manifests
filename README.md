@@ -1,5 +1,4 @@
-[![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/bsmnetwork/ndasynapse-manifests.svg)](https://hub.docker.com/r/bsmnetwork/ndasynapse-manifests/builds)
-
+[![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/bsmnetwork/ndasynapse-manifests)](https://hub.docker.com/r/bsmnetwork/ndasynapse-manifests)
 
 # NDA manifests to Synapse
 
