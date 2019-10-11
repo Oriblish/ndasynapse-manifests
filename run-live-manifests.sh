@@ -10,4 +10,4 @@ aws ssm get-parameters --names nda-config --with-decryption --region us-east-1 -
 
 echo "Running ndasynapse" $(query-nda --version) > /dev/stderr
 
-manifest_guid_data.py --config /root/ndaconfig.json --collection_id 2458 2960 2961 2962 2963 2964 2965 2966 2967 2968 --manifest_type ${manifest_type} > /tmp/nda-manifests-${manifest_type}-LIVE.csv && synapse store --parentId syn20858271 /tmp/nda-manifests-${manifest_type}-LIVE.csv;
+manifest_guid_data.py --config /root/ndaconfig.json --collection_id 2458 2960 2961 2962 2963 2964 2965 2966 2967 2968 --manifest_type ${manifest_type} > /tmp/nda-manifests-${manifest_type}-LIVE.csv && synapse store --noForceVersion --parentId syn20858271 /tmp/nda-manifests-${manifest_type}-LIVE.csv;
