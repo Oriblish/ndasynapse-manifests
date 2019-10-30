@@ -23,3 +23,7 @@ To run on an Amazon AWS instance or within the AWS ecosystem, grant IAM permissi
 ```
 docker run bsmn/ndasynapse-manifests:latest
 ```
+
+## Amazon Web Services Infrastructure
+
+This Docker container is provided to run as an AWS Batch job. There are two jobs scripts provided here - [run-live-manifests.sh](run-live-manifests.sh) and [run-original-manifests.sh](run-original-manifests.sh). Each is an AWS Batch array job that queries NDA for the data available through the NDA API GUID query service (the 'live' data) and the NDA API Submission query service (the original submitted manifests). Each outputs CSV files that are [stored in Synapse](https://www.synapse.org/#!Synapse:syn20712253).
