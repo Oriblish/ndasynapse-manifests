@@ -30,3 +30,9 @@ This Docker container is provided to run as an AWS Batch job. Each is an AWS Bat
 
 1. [run-live-manifests.sh](run-live-manifests.sh) gets the live data. It uses the [`manifest_types.txt`](manifest_types.txt) file to create the array jobs - one for each manifest type.
 1. [run-original-manifests.sh](run-original-manifests.sh) gets the historical (originally submitted) data. It uses the [`manifest_types_short.txt`](manifest_types_short.txt) file to create the array jobs - one for each manifest type.
+
+There are also two example AWS Batch job definition templates ([ndamanifests-live-array-job.json](ndamanifests-live-array-job.json) and [ndamanifests-original-array-job.json](ndamanifests-original-array-job.json) that can be used to submit directly to a configured job queue using the AWS command line interface:
+
+```
+aws batch submit-job --cli-input-json file:///path/to/ndasynapse-manifests/ndamanifests-original-array-job.json
+```
