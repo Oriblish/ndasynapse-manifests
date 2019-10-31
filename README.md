@@ -37,7 +37,7 @@ There are also two example AWS Batch job definition templates ([ndamanifests-liv
 aws batch submit-job --cli-input-json file:///path/to/ndasynapse-manifests/ndamanifests-original-array-job.json
 ```
 
-TODO: Document the AWS infrastructure required to run this on an automated basis:
+TODO: Document the AWS infrastructure required to run this on an automated basis (this is being developed into a CloudFormation template at [Sage-Bionetworks/bsmn-ndasynapse-manifests-aws-infra](https://github.com/Sage-Bionetworks/bsmn-ndasynapse-manifests-aws-infra):
 
 1. Batch compute environment
 1. Batch job queue
