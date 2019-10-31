@@ -2,13 +2,13 @@
 
 # NDA manifests to Synapse
 
-This is a Docker container that uses the Python package `ndasynapse` to query the NIMH Data Archive API for data submission manifests related to Brain Somatic Mosaicism Network collections.
+This is a suite of tools that use the Python package `ndasynapse` to query the NIMH Data Archive API for data submission manifests related to Brain Somatic Mosaicism Network collections. This repository contains the definition for a Docker image (in the [`Dockerfile`](Dockerfile)) to perform these tasks.
 
 ## Requirements
 
-1. This Docker container.
-2. Username and password to Synapse stored in the AWS Parameter Store.
-3. Login credentials to NIMH Data Archive in JSON format for access by the `ndasynapse`, stored in the AWS Parameter Store.
+1. The Docker container (available via `docker pull bsmnetwork/ndasynapse-manifests:latest` or at [DockerHub](https://hub.docker.com/r/bsmnetwork/ndasynapse-manifests).
+2. The contents of a [Synapse configuration file](https://docs.synapse.org/articles/client_configuration.html) with a username and password stored in the [AWS Parameter Store](https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-parameter-store.html).
+3. The contents of a [JSON configuration file](https://github.com/bsmn/ndasynapse#configuration) for the NIMH Data Archive used by the `ndasynapse` package, also stored in the AWS Parameter Store.
 
 ## Usage
 
