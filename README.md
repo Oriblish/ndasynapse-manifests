@@ -36,3 +36,10 @@ There are also two example AWS Batch job definition templates ([ndamanifests-liv
 ```
 aws batch submit-job --cli-input-json file:///path/to/ndasynapse-manifests/ndamanifests-original-array-job.json
 ```
+
+TODO: Document the AWS infrastructure required to run this on an automated basis:
+
+1. Batch compute environment
+1. Batch job queue
+1. Batch job definitions
+1. Cloudwatch Event Rule (scheduled)
