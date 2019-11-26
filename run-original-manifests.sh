@@ -10,4 +10,13 @@ aws ssm get-parameters --names nda-config --with-decryption --region us-east-1 -
 
 echo "Running ndasynapse" $(query-nda --version) > /dev/stderr
 
-query-nda --config /root/ndaconfig.json get-collection-manifests --collection_id 2458 2960 2961 2962 2963 2964 2965 2966 2967 2968 --manifest_type ${manifest_type} > /tmp/nda-manifests-${manifest_type}-ORIGINAL.csv && synapse store --noForceVersion --parentId syn20858272 /tmp/nda-manifests-${manifest_type}-ORIGINAL.csv
+cat /collection_ids.txt | xargs -P8 -I{} -n 1 sh -c 'query-nda --config /root/ndaconfig.json get-collection-manifests --collection_id ${2} --manifest_type ${1} > /tmp/nda-manifest-${1}-${2}-ORIGINAL.csv' -- ${manifest_type} {}
+
+# Due to a Pandas bug (https://github.com/pandas-dev/pandas/issues/15891)
+# Cannot output an empty data frame to csv, so find files of size 1 and delete them.
+find /tmp/ -maxdepth 1 -name "nda-manifest-${manifest_type}*-ORIGINAL.csv" -size 1 -delete
+
+# Concatenate all files together
+awk '(NR == 1) || (FNR > 1)' /tmp/nda-manifest-${manifest_type}-*-ORIGINAL.csv > /tmp/nda-manifests-${manifest_type}-ORIGINAL.csv
+
+synapse store --noForceVersion --parentId syn20858272 /tmp/nda-manifests-${manifest_type}-ORIGINAL.csv
