@@ -31,3 +31,4 @@ RUN chmod +x /get-experiments-from-samples.sh
 
 COPY manifest_types_short.txt /manifest_types_short.txt
 COPY manifest_types.txt /manifest_types.txt
+COPY collection_ids.txt /collection_ids.txt
