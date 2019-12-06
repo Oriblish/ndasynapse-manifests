@@ -17,6 +17,6 @@ cat /collection_ids.txt | xargs -P8 -I{} -n 1 sh -c 'query-nda --config /root/nd
 find /tmp/ -maxdepth 1 -name "nda-manifest-${manifest_type}*-ORIGINAL.csv" -size 1 -delete
 
 # Concatenate all files together
-awk '(NR == 1) || (FNR > 1)' /tmp/nda-manifest-${manifest_type}-*-ORIGINAL.csv > /tmp/nda-manifests-${manifest_type}-ORIGINAL.csv
+/concatenate-csvs.py /tmp/nda-manifest-${manifest_type}-*-ORIGINAL.csv > /tmp/nda-manifests-${manifest_type}-ORIGINAL.csv
 
 synapse store --noForceVersion --parentId syn20858272 /tmp/nda-manifests-${manifest_type}-ORIGINAL.csv

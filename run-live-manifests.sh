@@ -17,7 +17,7 @@ cat /collection_ids.txt | xargs -P8 -I{} -n 1 sh -c 'manifest_guid_data.py --con
 find /tmp/ -maxdepth 1 -name "nda-manifest-${manifest_type}*-LIVE.csv" -size 1 -delete
 
 # Concatenate all files together
-awk '(NR == 1) || (FNR > 1)' /tmp/nda-manifest-${manifest_type}-*-LIVE.csv > /tmp/nda-manifests-${manifest_type}-LIVE.csv
+/concatenate-csvs.py /tmp/nda-manifest-${manifest_type}-*-LIVE.csv > /tmp/nda-manifests-${manifest_type}-LIVE.csv
 
 # Store in Synapse
 synapse store --noForceVersion --parentId syn20858271 /tmp/nda-manifests-${manifest_type}-LIVE.csv

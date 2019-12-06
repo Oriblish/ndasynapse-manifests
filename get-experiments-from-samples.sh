@@ -11,5 +11,6 @@ GENOMICS_SAMPLE_FILE_ID='syn20822548'
 OUTPUT_FOLDER_ID='syn20858271'
 
 synapse cat ${GENOMICS_SAMPLE_FILE_ID} | cut -f 2 -d, | tail -n +2 | sed 's/"//g' | sort | uniq | xargs -P20 -I{} -n 1 sh -c 'query-nda --config /root/ndaconfig.json get-experiments --experiment_id "$1" >| "/tmp/nda-experiment-$1.csv"' -- {}
-awk '(NR == 1) || (FNR > 1)' /tmp/nda-experiment-*.csv > /tmp/nda-experiments-LIVE.csv
+
+/concatenate-csvs.py /tmp/nda-experiment-*.csv > /tmp/nda-experiments-LIVE.csv
 synapse store --noForceVersion --parentId ${OUTPUT_FOLDER_ID} /tmp/nda-experiments-LIVE.csv
