@@ -1,6 +1,6 @@
-[![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/bsmnetwork/ndasynapse-manifests)](https://hub.docker.com/r/bsmnetwork/ndasynapse-manifests)
-
 # NDA manifests to Synapse
+
+[![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/bsmnetwork/ndasynapse-manifests)](https://hub.docker.com/r/bsmnetwork/ndasynapse-manifests)
 
 This is a suite of tools that use the Python package `ndasynapse` to query the NIMH Data Archive API for data submission manifests related to Brain Somatic Mosaicism Network collections. This repository contains the definition for a Docker image (in the [`Dockerfile`](Dockerfile)) to perform these tasks. The tools get data from a limited set of possible manifest types defined at NDA. These are set in the [`manifest_types.txt`](manifest_types.txt) (versioned manifest type, like `genomics_subject02`) and [`manifest_types_short.txt`](manifest_types_short.txt) (unversioned manifest type, like `genomics_subject`) files.
 
@@ -14,13 +14,13 @@ This is a suite of tools that use the Python package `ndasynapse` to query the N
 
 To run locally, you need to provide an AWS credentials configuration file to the Docker container:
 
-```
+```terminal
 docker run -v /home/kdaily/ndalogs_config.json:/root/ndaconfig.json -v /home/kdaily/.aws/credentials:/root/.aws/credentials bsmn/ndasynapse-manifests:latest
 ```
 
 To run on an Amazon AWS instance or within the AWS ecosystem, grant IAM permissions to the infrastructure to access the configuration files from the Parameter Store. Then you can run:
 
-```
+```terminal
 docker run bsmn/ndasynapse-manifests:latest
 ```
 
@@ -43,3 +43,7 @@ TODO: Document the AWS infrastructure required to run this on an automated basis
 1. Batch job queue
 1. Batch job definitions
 1. Cloudwatch Event Rule (scheduled)
+
+## Development
+
+The Dockerfile uses a `pip` requirements file (`requirements.txt`) for dependencies. When updating the package used to interface with NDA, `ndasynapse`, be sure to change the version number required in this file.
