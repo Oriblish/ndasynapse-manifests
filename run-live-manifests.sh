@@ -10,7 +10,7 @@ aws ssm get-parameters --names nda-config --with-decryption --region us-east-1 -
 
 echo "Running ndasynapse" $(query-nda --version) > /dev/stderr
 
-cat /collection_ids.txt | xargs -P8 -I{} -n 1 sh -c 'manifest_guid_data.py --config /root/ndaconfig.json --collection_id ${2} --manifest_type ${1} > /tmp/nda-manifest-${1}-${2}-LIVE.csv' -- ${manifest_type} {}
+cat /collection_ids.txt | xargs -P8 -I{} -n 1 sh -c 'query-nda --config /root/ndaconfig.json get-guid-collection-manifests --manifest_type ${1} --collection_id ${2} > /tmp/nda-manifest-${1}-${2}-LIVE.csv' -- ${manifest_type} {}
 
 # Due to a Pandas bug (https://github.com/pandas-dev/pandas/issues/15891)
 # Cannot output an empty data frame to csv, so find files of size 1 and delete them.
