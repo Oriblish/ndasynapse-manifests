@@ -19,7 +19,7 @@ if __name__ == "__main__":
     for filename in all_csv:
         try:
             df = pd.read_csv(filename, index_col=None, header=0, 
-                            parse_dates=False, infer_datetime_format=False)
+                             parse_dates=False, infer_datetime_format=False)
             li.append(df)
         except pd.errors.EmptyDataError:
             pass
