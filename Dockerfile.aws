@@ -15,10 +15,11 @@ RUN python3 -m pip install --upgrade pip \
 && python3 -m pip install boto3
 
 RUN python3 -m pip install awscli
+RUN python3 -m pip install "numpy<1.18"
 
 COPY requirements.txt /requirements.txt
 
-RUN pip install -r /requirements.txt
+RUN python3 -m pip install -r /requirements.txt
 
 COPY run-live-manifests.sh /run-live-manifests.sh
 RUN chmod +x /run-live-manifests.sh
