@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 
-import pandas as pd
+import csv
 import os
+
+import pandas as pd
 
 if __name__ == "__main__":
     import argparse
@@ -23,4 +25,4 @@ if __name__ == "__main__":
             pass
 
     frame = pd.concat(li, axis=0, ignore_index=True)
-    frame.to_csv('/dev/stdout', index=False)
+    frame.to_csv('/dev/stdout', index=False, quoting=csv.QUOTE_NONNUMERIC)
