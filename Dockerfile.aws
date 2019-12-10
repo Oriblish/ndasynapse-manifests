@@ -33,6 +33,9 @@ RUN chmod +x /get-experiments-from-samples.sh
 COPY concatenate-csvs.py /concatenate-csvs.py
 RUN chmod +x /concatenate-csvs.py
 
+COPY concatenate-csvs.py /get-column.py
+RUN chmod +x /get-column.py
+
 COPY manifest_types_short.txt /manifest_types_short.txt
 COPY manifest_types.txt /manifest_types.txt
 COPY collection_ids.txt /collection_ids.txt
