@@ -2,7 +2,7 @@
 
 [![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/bsmnetwork/ndasynapse-manifests)](https://hub.docker.com/r/bsmnetwork/ndasynapse-manifests)
 
-This is a suite of tools that use the Python package `ndasynapse` to query the NIMH Data Archive API for data submission manifests related to Brain Somatic Mosaicism Network collections. This repository contains the definition for a Docker image (in the [`Dockerfile`](Dockerfile)) to perform these tasks. The tools get data from a limited set of possible manifest types defined at NDA. These are set in the [`manifest_types_versioned.txt`](manifest_types_versioned.txt) (versioned manifest type, like `genomics_subject02`) and [`manifest_types_unversioned.txt`](manifest_types_unversioned.txt) (unversioned manifest type, like `genomics_subject`) files.
+This is a suite of tools that use the Python package `ndasynapse` to query the NIMH Data Archive API for data submission manifests related to Brain Somatic Mosaicism Network collections. This repository contains the definition for a Docker image (in the [`Dockerfile`](Dockerfile)) to perform these tasks. The tools get data from a limited set of possible manifest types defined at NDA. These are set in the [`manifest_types_versioned.txt`](config/manifest_types_versioned.txt) (versioned manifest type, like `genomics_subject02`) and [`manifest_types_unversioned.txt`](config/manifest_types_unversioned.txt) (unversioned manifest type, like `genomics_subject`) files.
 
 ## Requirements
 
@@ -15,7 +15,7 @@ This is a suite of tools that use the Python package `ndasynapse` to query the N
 To run locally, you need to provide an AWS credentials configuration file to the Docker container:
 
 ```terminal
-docker run -v /home/kdaily/ndalogs_config.json:/root/ndaconfig.json -v /home/kdaily/.aws/credentials:/root/.aws/credentials bsmn/ndasynapse-manifests:latest
+docker run -v /home/kdaily/.aws/credentials:/root/.aws/credentials bsmn/ndasynapse-manifests:latest
 ```
 
 To run on an Amazon AWS instance or within the AWS ecosystem, grant IAM permissions to the infrastructure to access the configuration files from the Parameter Store. Then you can run:
@@ -28,8 +28,8 @@ docker run bsmn/ndasynapse-manifests:latest
 
 This Docker container is provided to run as an AWS Batch job. Each is an AWS Batch array job that queries NDA for the data available through the NDA API GUID query service (the 'live' data) and the NDA API Submission query service (the original submitted manifests). Each outputs CSV files that are [stored in Synapse](https://www.synapse.org/#!Synapse:syn20712253). There are two jobs scripts provided here:
 
-1. [run-live-manifests.sh](run-live-manifests.sh) gets the live data. It uses the [`manifest_types_versioned.txt`](manifest_types_versioned.txt) file to create the array jobs - one for each manifest type.
-1. [run-original-manifests.sh](run-original-manifests.sh) gets the historical (originally submitted) data. It uses the [`manifest_types_unversioned.txt`](manifest_types_unversioned.txt) file to create the array jobs - one for each manifest type.
+1. [run-live-manifests.sh](bin/run-live-manifests.sh) gets the live data. It uses the [`manifest_types_versioned.txt`](config/manifest_types_versioned.txt) file to create the array jobs - one for each manifest type.
+1. [run-original-manifests.sh](bin/run-original-manifests.sh) gets the historical (originally submitted) data. It uses the [`manifest_types_unversioned.txt`](config/manifest_types_unversioned.txt) file to create the array jobs - one for each manifest type.
 
 These tasks require access to the AWS Parameter store, in which the contents of the `ndaconfig.json` and Synapse configuration file are required to be stored. They must be stored in parameters named `/bsmn-ndasynapse-manifests/synapseConfig` and `/bsmn-ndasynapse-manifests/ndaConfig`.
 

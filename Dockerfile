@@ -22,5 +22,5 @@ RUN python3 -m pip install -r /requirements.txt
 
 COPY bin/* /usr/local/bin/
 
-COPY manifest_types*.txt /
-COPY collection_ids.txt /collection_ids.txt
+COPY config/manifest_types*.txt /
+COPY config/collection_ids.txt /collection_ids.txt
