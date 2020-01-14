@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -o errexit
+
 LINE=$((AWS_BATCH_JOB_ARRAY_INDEX + 1))
 manifest_type=$(sed -n ${LINE}p /manifest_types_short.txt)
 
