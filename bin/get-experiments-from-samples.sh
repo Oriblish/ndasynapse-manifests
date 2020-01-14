@@ -10,7 +10,7 @@ GENOMICS_SAMPLE_FILE_ID='syn20822548'
 # Synapse Folder to store output file in
 OUTPUT_FOLDER_ID='syn20858271'
 
-synapse cat ${GENOMICS_SAMPLE_FILE_ID} | /get-column.py --column EXPERIMENT_ID /dev/stdin | tail -n +2 | sed 's/"//g' | sort | uniq | xargs -P20 -I{} -n 1 sh -c 'query-nda --config /root/ndaconfig.json get-experiments --experiment_id "$1" >| "/tmp/nda-experiment-$1.csv"' -- {}
+synapse cat ${GENOMICS_SAMPLE_FILE_ID} | /usr/local/bin/get-column.py --column EXPERIMENT_ID /dev/stdin | tail -n +2 | sed 's/"//g' | sort | uniq | xargs -P20 -I{} -n 1 sh -c 'query-nda --config /root/ndaconfig.json get-experiments --experiment_id "$1" >| "/tmp/nda-experiment-$1.csv"' -- {}
 
-/concatenate-csvs.py /tmp/nda-experiment-*.csv > /tmp/nda-experiments-LIVE.csv
+/usr/local/bin/concatenate-csvs.py /tmp/nda-experiment-*.csv > /tmp/nda-experiments-LIVE.csv
 synapse store --noForceVersion --parentId ${OUTPUT_FOLDER_ID} /tmp/nda-experiments-LIVE.csv
