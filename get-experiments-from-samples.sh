@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 # Get credentials for Synapse and NDA
-aws ssm get-parameters --names synapseconfig-kdaily --with-decryption --region us-east-1 --output text --query "Parameters[*].{Value:Value}" > /root/.synapseConfig
-aws ssm get-parameters --names nda-config --with-decryption --region us-east-1 --output text --query "Parameters[*].{Value:Value}" > /root/ndaconfig.json
+aws ssm get-parameters --names /bsmn-ndasynapse-manifests/synapseConfig --with-decryption --region us-east-1 --output text --query "Parameters[*].{Value:Value}" > /root/.synapseConfig
+aws ssm get-parameters --names /bsmn-ndasynapse-manifests/ndaConfig --with-decryption --region us-east-1 --output text --query "Parameters[*].{Value:Value}" > /root/ndaconfig.json
 
 # ID of the genomics_sample file to get experiment IDs from
 GENOMICS_SAMPLE_FILE_ID='syn20822548'
