@@ -21,7 +21,7 @@ find /tmp/ -maxdepth 1 -name "nda-manifest-${manifest_type}*-LIVE.csv" -size 1 -
 # Concatenate all files together and sort the columns.
 # The columns are sorted alphabetically so that if the contents haven't changed
 # then a new version is not pushed to Synapse.
-concatenate-csvs.py /tmp/nda-manifest-${manifest_type}-*-LIVE.csv | sort-columns.py > /tmp/nda-manifests-${manifest_type}-LIVE.csv
+concatenate-csvs.py /tmp/nda-manifest-${manifest_type}-*-LIVE.csv | sort | sort-columns.py > /tmp/nda-manifests-${manifest_type}-LIVE.csv
 
 # Store in Synapse
 synapse store --noForceVersion --parentId syn20858271 /tmp/nda-manifests-${manifest_type}-LIVE.csv
