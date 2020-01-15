@@ -18,8 +18,10 @@ cat /collection_ids.txt | xargs -P8 -I{} -n 1 sh -c 'query-nda --config /root/nd
 # Cannot output an empty data frame to csv, so find files of size 1 and delete them.
 find /tmp/ -maxdepth 1 -name "nda-manifest-${manifest_type}*-LIVE.csv" -size 1 -delete
 
-# Concatenate all files together
-/usr/local/bin/concatenate-csvs.py /tmp/nda-manifest-${manifest_type}-*-LIVE.csv > /tmp/nda-manifests-${manifest_type}-LIVE.csv
+# Concatenate all files together and sort the columns.
+# The columns are sorted alphabetically so that if the contents haven't changed
+# then a new version is not pushed to Synapse.
+concatenate-csvs.py /tmp/nda-manifest-${manifest_type}-*-LIVE.csv | sort-columns.py > /tmp/nda-manifests-${manifest_type}-LIVE.csv
 
 # Store in Synapse
 synapse store --noForceVersion --parentId syn20858271 /tmp/nda-manifests-${manifest_type}-LIVE.csv
