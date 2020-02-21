@@ -3,7 +3,7 @@
 set -o errexit
 
 LINE=$((AWS_BATCH_JOB_ARRAY_INDEX + 1))
-manifest_type=$(sed -n ${LINE}p /manifest_types_versioned.txt)
+manifest_type=$(sed -n ${LINE}p /config/manifest_types_versioned.txt)
 
 # Query NDA using the GUID query service for all BSMN collections
 
@@ -12,7 +12,7 @@ aws ssm get-parameters --names /bsmn-ndasynapse-manifests/ndaConfig --with-decry
 
 echo "Running ndasynapse" $(query-nda --version) > /dev/stderr
 
-cat /collection_ids.txt | xargs -P8 -I{} -n 1 sh -c 'query-nda --config /root/ndaconfig.json get-guid-collection-manifests --manifest_type ${1} --collection_id ${2} > /tmp/nda-manifest-${1}-${2}-LIVE.csv' -- ${manifest_type} {}
+cat /config/collection_ids.txt | xargs -P8 -I{} -n 1 sh -c 'query-nda --config /root/ndaconfig.json get-guid-collection-manifests --manifest_type ${1} --collection_id ${2} > /tmp/nda-manifest-${1}-${2}-LIVE.csv' -- ${manifest_type} {}
 
 # Due to a Pandas bug (https://github.com/pandas-dev/pandas/issues/15891)
 # Cannot output an empty data frame to csv, so find files of size 1 and delete them.
