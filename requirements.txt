@@ -1,2 +1,2 @@
-synapseclient.git>=v1.9.4
+synapseclient>=v1.9.4
 ndasynapse>=v1.0.0
