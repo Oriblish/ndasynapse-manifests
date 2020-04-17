@@ -3,7 +3,7 @@
 set -o errexit
 
 LINE=$((AWS_BATCH_JOB_ARRAY_INDEX + 1))
-manifest_type=$(sed -n ${LINE}p /manifest_types_versioned.txt)
+manifest_type=$(sed -n ${LINE}p /manifest_types.txt)
 
 # Query NDA using the GUID query service for all BSMN collections
 
