@@ -28,8 +28,8 @@ docker run bsmn/ndasynapse-manifests:latest
 
 This Docker container is provided to run as an AWS Batch job. Each is an AWS Batch array job that queries NDA for the data available through the NDA API GUID query service (the 'live' data) and the NDA API Submission query service (the original submitted manifests). Each outputs CSV files that are [stored in Synapse](https://www.synapse.org/#!Synapse:syn20712253). There are two jobs scripts provided here:
 
-1. [run-live-manifests.sh](bin/run-live-manifests.sh) gets the live data. It uses the [`manifest_types_versioned.txt`](config/manifest_types_versioned.txt) file to create the array jobs - one for each manifest type.
-1. [run-original-manifests.sh](bin/run-original-manifests.sh) gets the historical (originally submitted) data. It uses the [`manifest_types_unversioned.txt`](config/manifest_types_unversioned.txt) file to create the array jobs - one for each manifest type.
+1. [run-live-manifests.sh](bin/run-live-manifests.sh) gets the live data. It uses the [`manifest_types.txt`](config/manifest_types.txt) file to create the array jobs - one for each manifest type.
+1. [run-original-manifests.sh](bin/run-original-manifests.sh) gets the historical (originally submitted) data. It uses the [`manifest_types.txt`](config/manifest_types.txt) file and strips the version number (last two digits) to create the array jobs - one for each manifest type.
 
 These tasks require access to the AWS Parameter store, in which the contents of the `ndaconfig.json` and Synapse configuration file are required to be stored. They must be stored in parameters named `/bsmn-ndasynapse-manifests/synapseConfig` and `/bsmn-ndasynapse-manifests/ndaConfig`.
 
